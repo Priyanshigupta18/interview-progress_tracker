@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interview Practice Tracker</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="container">
+      <h1>Interview Practice Tracker</h1>
+      <p class="subtitle">Track your weekly interview preparation in one place.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- DASHBOARD -->
+    <section aria-labelledby="dash-title">
+      <h2 id="dash-title" class="section-title">Dashboard</h2>
+      <div class="stats-grid">
+        <article class="card stat">
+          <span class="stat-label">Total questions</span>
+          <strong class="stat-value" id="statTotal">0</strong>
+        </article>
+        <article class="card stat">
+          <span class="stat-label">DSA problems completed</span>
+          <strong class="stat-value" id="statDsa">0</strong>
+        </article>
+        <article class="card stat">
+          <span class="stat-label">Interview questions completed</span>
+          <strong class="stat-value" id="statInterview">0</strong>
+          <span class="stat-hint">Git + Technical</span>
+        </article>
+        <article class="card stat">
+          <span class="stat-label">Machine coding</span>
+          <select id="machineStatus" aria-label="Machine coding status"></select>
+        </article>
+      </div>
+
+      <article class="card progress-card">
+        <div class="progress-head">
+          <span class="stat-label">Overall progress</span>
+          <strong id="progressText">0%</strong>
+        </div>
+        <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressBar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <p class="stat-hint" id="progressDetail">No questions yet.</p>
+      </article>
+    </section>
+
+    <!-- ADD QUESTION -->
+    <section aria-labelledby="add-title">
+      <h2 id="add-title" class="section-title">Add a question</h2>
+      <form id="questionForm" class="card form-grid" novalidate>
+        <div class="field field-wide">
+          <label for="title">Question</label>
+          <input id="title" type="text" placeholder="e.g. Two Sum, Explain git rebase vs merge" maxlength="120" autocomplete="off" />
+          <small class="error" id="titleError"></small>
+        </div>
+        <div class="field">
+          <label for="category">Category</label>
+          <select id="category">
+            <option value="">Select…</option>
+            <option>DSA</option>
+            <option>Git</option>
+            <option>Technical</option>
+          </select>
+          <small class="error" id="categoryError"></small>
+        </div>
+        <div class="field">
+          <label for="difficulty">Difficulty</label>
+          <select id="difficulty">
+            <option value="">Select…</option>
+            <option>Easy</option>
+            <option>Medium</option>
+            <option>Hard</option>
+          </select>
+          <small class="error" id="difficultyError"></small>
+        </div>
+        <div class="field">
+          <label for="status">Status</label>
+          <select id="status">
+            <option>Pending</option>
+            <option>In Progress</option>
+            <option>Completed</option>
+          </select>
+        </div>
+        <div class="field field-submit">
+          <button type="submit" class="btn btn-primary">Add question</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- QUESTIONS -->
+    <section aria-labelledby="list-title">
+      <h2 id="list-title" class="section-title">Your questions</h2>
+
+      <div class="card filters">
+        <input id="search" type="search" placeholder="Search questions…" aria-label="Search questions" />
+        <select id="filterCategory" aria-label="Filter by category">
+          <option value="all">All categories</option>
+          <option>DSA</option>
+          <option>Git</option>
+          <option>Technical</option>
+        </select>
+        <select id="filterStatus" aria-label="Filter by status">
+          <option value="all">All statuses</option>
+          <option>Pending</option>
+          <option>In Progress</option>
+          <option>Completed</option>
+        </select>
+        <select id="filterDifficulty" aria-label="Filter by difficulty">
+          <option value="all">All difficulties</option>
+          <option>Easy</option>
+          <option>Medium</option>
+          <option>Hard</option>
+        </select>
+      </div>
+
+      <p class="result-count" id="resultCount" aria-live="polite"></p>
+      <ul class="question-list" id="questionList"></ul>
+
+      <div class="empty-state card" id="emptyState" hidden>
+        <h3>No questions yet</h3>
+        <p>Add your first question above to start tracking your prep.</p>
+      </div>
+
+      <div class="empty-state card" id="noResults" hidden>
+        <h3>No matching questions</h3>
+        <p>Try a different search or clear the filters.</p>
+        <button type="button" class="btn" id="clearFilters">Clear filters</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container footer">Data is saved in your browser (LocalStorage).</footer>
+
+  <script src="storage.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
